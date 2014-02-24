@@ -2,6 +2,7 @@ package logbuf
 
 import (
 	"os"
+	"sync"
 	"syscall"
 )
 
@@ -10,6 +11,7 @@ type Logbuf struct {
 	mode  os.FileMode
 	file  *os.File
 	inode uint64
+	mutex sync.Mutex
 }
 
 /*
@@ -33,6 +35,8 @@ If our file has been deleted or has been moved out from under us,
 a new file will be created.
 */
 func (l *Logbuf) Write(p []byte) (int, error) {
+	l.mutex.Lock()
+	defer l.mutex.Unlock()
 	inode, err := l.checkInode()
 	if os.IsNotExist(err) || inode != l.inode {
 		err = l.reopen()
@@ -45,6 +49,9 @@ func (l *Logbuf) Write(p []byte) (int, error) {
 
 /* Close our file */
 func (l *Logbuf) Close() error {
+	l.mutex.Lock()
+	defer l.mutex.Unlock()
+
 	return l.file.Close()
 }
 
@@ -55,7 +62,7 @@ func (l *Logbuf) checkInode() (uint64, error) {
 }
 
 func (l *Logbuf) reopen() error {
-	if err := l.Close(); err != nil {
+	if err := l.file.Close(); err != nil {
 		return err
 	}
 	return l.open()
