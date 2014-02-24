@@ -1,4 +1,4 @@
-package logbuf
+package rfw
 
 import (
 	"bytes"
@@ -9,11 +9,11 @@ import (
 	"testing"
 )
 
-func TestLogbuf(t *testing.T) {
+func TestRfw(t *testing.T) {
 	tmpdir := makeTempDir(t)
 	defer rmTempDir(tmpdir)
 
-	l, err := Open(path.Join(tmpdir, "logbuf"), 0644)
+	l, err := Open(path.Join(tmpdir, "rfw"), 0644)
 	chkerr(t, err)
 
 	// Basic writer tests
@@ -69,11 +69,11 @@ func rmTempDir(tmpdir string) {
 	_ = os.RemoveAll(tmpdir)
 }
 
-func assertFileEquals(t *testing.T, l *Logbuf, expected []byte) {
+func assertFileEquals(t *testing.T, l *Rfw, expected []byte) {
 	contents, err := ioutil.ReadFile(l.path)
 	chkerr(t, err)
 	if !bytes.Equal(contents, expected) {
 		_, _, line, _ := runtime.Caller(1)
-		t.Fatalf("line %d: Expected %v, got %v from logbuf file.", line, expected, contents)
+		t.Fatalf("line %d: Expected %v, got %v from rfw file.", line, expected, contents)
 	}
 }
