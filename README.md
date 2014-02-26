@@ -1,6 +1,6 @@
-# Rotating File Writer
+# Rotating File writer
 
-An `io.Writer` & `io.Closer` compliant file writer that will always write to the path that you give it, even if somebody deletes/renames that path out from under you.
+An `io.writer` & `io.Closer` compliant file writer that will always write to the path that you give it, even if somebody deletes/renames that path out from under you.
 
 Created so that Go programs can be used with the standard Linux `logrotate`: writes following a removal / rename will occur in a newly created file rather than the previously opened filehandle.
 

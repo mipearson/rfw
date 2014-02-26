@@ -9,7 +9,7 @@ import (
 	"testing"
 )
 
-func TestRfw(t *testing.T) {
+func TestWriter(t *testing.T) {
 	tmpdir := makeTempDir(t)
 	defer rmTempDir(tmpdir)
 
@@ -69,11 +69,11 @@ func rmTempDir(tmpdir string) {
 	_ = os.RemoveAll(tmpdir)
 }
 
-func assertFileEquals(t *testing.T, l *Rfw, expected []byte) {
+func assertFileEquals(t *testing.T, l *Writer, expected []byte) {
 	contents, err := ioutil.ReadFile(l.path)
 	chkerr(t, err)
 	if !bytes.Equal(contents, expected) {
 		_, _, line, _ := runtime.Caller(1)
-		t.Fatalf("line %d: Expected %v, got %v from rfw file.", line, expected, contents)
+		t.Fatalf("line %d: Got %v, expected %v from rfw file.", line, contents, expected)
 	}
 }
