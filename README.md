@@ -6,7 +6,9 @@ An `io.writer` & `io.Closer` compliant file writer that will always write to the
 
 Created so that Go programs can be used with the standard Linux `logrotate`: writes following a removal / rename will occur in a newly created file rather than the previously opened filehandle.
 
-## Example
+As the current implementation relies on remembering and checking the current inode of the desired file, this code will not work or compile on Windows.
+
+### Example
 
 ``` go
 package main
@@ -26,3 +28,11 @@ func main() {
   log.Println("Logging as normal")
 }
 ```
+
+### TODO
+
+ * Use `exp/fsnotify` so that we don't need to call `stat` on every write
+ * Use `exp/winfsnotify` to allow for Windows support
+ * Trap SIGHUP and close/reopen all files
+ * Force a check every minute so that programs that rarely write can release filehandles
+
