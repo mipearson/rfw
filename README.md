@@ -1,6 +1,6 @@
 # Rotating File writer
 
-[![wercker status](https://app.wercker.com/status/b834fcde90ed6fdf2fc5e0a3ca98d518/m/ "wercker status")](https://app.wercker.com/project/bykey/b834fcde90ed6fdf2fc5e0a3ca98d518)
+[![wercker status](https://app.wercker.com/status/b834fcde90ed6fdf2fc5e0a3ca98d518/s/ "wercker status")](https://app.wercker.com/project/bykey/b834fcde90ed6fdf2fc5e0a3ca98d518) [![GoDoc](https://godoc.org/github.com/mipearson/rfw?status.png)](https://godoc.org/github.com/mipearson/rfw)
 
 An `io.writer` & `io.Closer` compliant file writer that will always write to the path that you give it, even if somebody deletes/renames that path out from under you.
 
