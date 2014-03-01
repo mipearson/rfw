@@ -1,9 +1,6 @@
-/*
-Package rfw implements a log rotation aware file writer.
-It will always write to the path that you give it, even if that file is
-deleted or moved out from under it.
-*/
-
+// Package rfw implements a log rotation aware file writer.
+// It will always write to the path that you give it, even if that file is
+// deleted or moved out from under it.
 package rfw
 
 import (
@@ -54,7 +51,7 @@ func (l *Writer) Write(p []byte) (int, error) {
 	return l.file.Write(p)
 }
 
-/* Close our writer. Subsequent writes will fail. */
+// Close our writer. Subsequent writes will fail.
 func (l *Writer) Close() error {
 	l.mutex.Lock()
 	defer l.mutex.Unlock()
