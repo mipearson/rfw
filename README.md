@@ -1,5 +1,7 @@
 # Rotating File writer
 
+[![wercker status](https://app.wercker.com/status/b834fcde90ed6fdf2fc5e0a3ca98d518/m/ "wercker status")](https://app.wercker.com/project/bykey/b834fcde90ed6fdf2fc5e0a3ca98d518)
+
 An `io.writer` & `io.Closer` compliant file writer that will always write to the path that you give it, even if somebody deletes/renames that path out from under you.
 
 Created so that Go programs can be used with the standard Linux `logrotate`: writes following a removal / rename will occur in a newly created file rather than the previously opened filehandle.
