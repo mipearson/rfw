@@ -62,7 +62,7 @@ func (l *Writer) Close() error {
 func (l *Writer) checkInode() (uint64, error) {
 	var stat syscall.Stat_t
 	err := syscall.Stat(l.path, &stat)
-	return stat.Ino, err
+	return uint64(stat.Ino), err
 }
 
 func (l *Writer) reopen() error {
